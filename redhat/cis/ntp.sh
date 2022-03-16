@@ -1,5 +1,7 @@
 #!/bin/sh
 
+cp /etc/ntp.conf /tmp/ntp.conf-original   # backupfile
+
 a=$(cat /etc/ntp.conf | grep 'restrict default nomodify notrap nopeer noquery')
 b=$a
 c="restrict default nomodify notrap nopeer noquery"

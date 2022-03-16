@@ -1,5 +1,8 @@
 #!/bin/sh
 
+cp /etc/chrony.conf /tmp/chrony.conf-original   # chrony backupfile
+
+cp /etc/sysconfig/chronyd /tmp/chronyd-original       # chronyd backupfile
 
 a=$(cat /etc/chrony.conf | grep 'server 0.rhel.pool.ntp.org iburst')
 b=$a
