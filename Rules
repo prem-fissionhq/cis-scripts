@@ -1,0 +1,8 @@
+Rule1: always backup the original file
+--> cp filename filename-original
+Rule2: copy file to different directory and test your changes on the copied file
+--> on success
+Rule3: apply the changes on the actual file
+--> on failure
+Rule4: Be prepared to revert the changes any time.
+--> cp filename-original filename
