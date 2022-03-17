@@ -6,7 +6,7 @@
 #sed -i '/ucredit/s/= .*/= -1/' /etc/security/pwquality.conf
 #sed -i '/lcredit/s/= .*/= -1/' /etc/security/pwquality.conf
 
-cp /etc/security/pwquality.conf /tmp/pwquality.conf
+cp /etc/security/pwquality.conf /tmp/pwquality.conf-original
 
 a=$(cat /etc/security/pwquality.conf | grep 'minlen')
 b=$a
