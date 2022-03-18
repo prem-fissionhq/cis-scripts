@@ -1,10 +1,7 @@
 #!/bin/sh
 
-cp /etc/audit/auditd.conf /tmp/auditd.conf-original
-
-#sed -i '/max_log_file_action/s/= .*/= KEEP_LOGS/' /etc/audit/auditd.conf
-#sed -i '/space_left_action/s/= .*/= EMAIL/' /etc/audit/auditd.conf
-#sed -i '/admin_space_left_action/s/= .*/= HALT/' /etc/audit/auditd.conf
+echo "Coping backupfile into /tmp directory"
+cp /etc/audit/auditd.conf /tmp/auditd.conf-original	#bacupfile
 
 a=$(cat /etc/audit/auditd.conf | grep max_log_file_action)
 b=$a

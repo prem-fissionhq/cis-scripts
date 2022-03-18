@@ -1,6 +1,7 @@
 #!/bin/sh
 
-cp /etc/audit/rules.d/audit.rules /tmp/audit.rules
+echo "Coping backup file into /tmp directory"	# backupfile
+cp /etc/audit/rules.d/audit.rules /tmp/audit.rules-original
 
 echo '-a always,exit -F arch=b64 -S adjtimex -S settimeofday -S stime -S clock_settime -k time-change' >> /etc/audit/rules.d/audit.rules
 

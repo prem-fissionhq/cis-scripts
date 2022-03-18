@@ -3,4 +3,4 @@
 yum install firewalld -y
 firewall-cmd --list-all
 systemctl start firewalld
-# systemctl status firewalld
+systemctl status firewalld

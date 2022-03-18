@@ -1,5 +1,6 @@
 #!/bin/sh
 
+echo "Coping backupfile into /tmp directory"
 cp /etc/ntp.conf /tmp/ntp.conf-original   # backupfile
 
 a=$(cat /etc/ntp.conf | grep 'restrict default nomodify notrap nopeer noquery')
@@ -13,7 +14,7 @@ then
         sed -i "/$a/a restrict -4 default kod nomodify notrap nopeer noquery" /etc/ntp.conf
         a="restrict -4 default kod nomodify notrap nopeer noquery"
         sed -i "/$a/a restrict -6 default kod nomodify notrap nopeer noquery" /etc/ntp.conf
-        echo "Config Changed"
+        echo "Config Changed 1"
 elif [ "$a" == "#$c" ]
 then
          echo "Change already present 1"
@@ -26,7 +27,7 @@ if [ "$a" == "" ]
 then
         b="restrict -4 default kod nomodify notrap nopeer noquery"
         sed -i "/$b/a restrict -6 default kod nomodify notrap nopeer noquery" /etc/ntp.conf
-        echo "Config Changed"
+        echo "Config Changed 1.1"
 elif [ "$a" == "$c" ]
 then
          echo "Change already present 1.1"
@@ -42,7 +43,7 @@ then
        a="#$a"
       sed -i "/$b/ s/$b/$a/" /etc/ntp.conf
       sed -i "/$a/a server time-a-g.nist.gov iburst" /etc/ntp.conf
-      echo "Config Changed"
+      echo "Config Changed 2"
 elif [ "$a" == "#$c" ]
 then
          echo "Change already present 2"
@@ -55,7 +56,7 @@ then
        a="#$a"
       sed -i "/$b/ s/$b/$a/" /etc/ntp.conf
       sed -i "/$a/a server time-d-g.nist.gov iburst" /etc/ntp.conf
-      echo "Config Changed"
+      echo "Config Changed 3"
 elif [ "$a" == "#$c" ]
 then
          echo "Change already present 3"
@@ -68,7 +69,7 @@ then
        a="#$a"
       sed -i "/$b/ s/$b/$a/" /etc/ntp.conf
       sed -i "/$a/a server time-a-wwv.nist.gov iburst" /etc/ntp.conf
-      echo "Config Changed"
+      echo "Config Changed 4"
 elif [ "$a" == "#$c" ]
 then
          echo "Change already present 4"
@@ -81,7 +82,7 @@ then
        a="#$a"
       sed -i "/$b/ s/$b/$a/" /etc/ntp.conf
       sed -i "/$a/a server time-a-b.nist.gov iburst" /etc/ntp.conf
-      echo "Config Changed"
+      echo "Config Changed 5"
 elif [ "$a" == "#$c" ]
 then
          echo "Change already present 5"
@@ -97,7 +98,7 @@ then
          a="$a -u ntp:ntp"
          a="\"$a\""
          sed -i "/OPTIONS/ s/$b/$a/" /etc/sysconfig/ntpd
-         echo "Config Changed"
+         echo "Config Changed 6"
 elif [ "$a" == "\"-g -u ntp:ntp\"" ]
 then
          echo "Change already present 6"
