@@ -62,9 +62,6 @@ echo " *************** START CROND *************** "
   chmod g-r-w-x,o-r-w-x /etc/at.allow
   chown 0:0 /etc/at.allow
 
-
-
-
   # Restrict at/cron to Authorized Users
   echo
   echo \*\*\*\* Restrict\ at/cron\ to\ Authorized\ Users
