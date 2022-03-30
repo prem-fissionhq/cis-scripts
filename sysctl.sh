@@ -3,7 +3,8 @@
 echo " *************** START SYSCTL *************** "
 
   mkdir -p /opt/config_files_backup
-  cp /etc/sysctl.conf /opt/config_files_backup/sysctl.conf-backup     # sysctl.conf file backup
+  backupfile=$(date +'%Y_%d_%m_%H:%M')
+  cp /etc/sysctl.conf /opt/config_files_backup/sysctl.conf-${backupfile}     # sysctl.conf file backup
 
   # Restrict Core Dumps
   echo

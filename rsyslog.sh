@@ -3,7 +3,8 @@
 echo " *************** START RSYSLOG *************** "
 
   mkdir -p /opt/config_files_backup
-  cp /etc/rsyslog.conf /opt/config_files_backup/rsyslog.conf-backup     # rsyslog.conf file backup
+  backupfile=$(date +'%Y_%d_%m_%H:%M')
+  cp /etc/rsyslog.conf /opt/config_files_backup/rsyslog.conf-${backupfile}     # rsyslog.conf file backup
 
 # Install the rsyslog package
   echo

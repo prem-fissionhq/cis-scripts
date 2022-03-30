@@ -3,7 +3,8 @@
 echo " *************** START BLACK LIST *************** "
 
 mkdir -p /opt/config_files_backup
-cp /etc/modprobe.d/blacklist.conf /opt/config_files_backup/blacklist.conf-backup           # blacklist.conf file backup
+backupfile=$(date +'%Y_%d_%m_%H:%M')
+cp /etc/modprobe.d/blacklist.conf /opt/config_files_backup/blacklist.conf-${backupfile}           # blacklist.conf file backup
 
 if [ ! -e /etc/modprobe.d/blacklist.conf ]; then
     mkdir -p /etc/modprobe.d

@@ -3,7 +3,8 @@
 echo " *************** START grub *************** "
 
   mkdir -p /opt/config_files_backup
-  cp /boot/grub2/grub.cfg /opt/config_files_backup/grub.cfg-backup      # grub.cfg file backup
+  backupfile=$(date +'%Y_%d_%m_%H:%M')
+  cp /boot/grub2/grub.cfg /opt/config_files_backup/grub.cfg-${backupfile}     # grub.cfg file backup
 
   # Set User/Group Owner on /boot/grub2/grub.cfg
   echo

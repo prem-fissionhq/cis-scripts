@@ -3,10 +3,14 @@
 echo " *************** START PWQUALITY *************** "
 
   mkdir -p /opt/config_files_backup
-  cp /etc/bashrc /opt/config_files_backup/bashrc-backup                       # bashrc file backup
-  cp /etc/security/pwquality.conf /opt/config_files_backup/pwquality.conf-backup  # pwquality.conf file backup
-  cp /etc/profile /opt/config_files_backup/profile-backup                     # profile file backup
-  cp /etc/selinux/config /opt/config_files_backup/selinux-config-backup       # selinux-config file backup
+  backupfile=$(date +'%Y_%d_%m_%H:%M')
+  cp /etc/bashrc /opt/config_files_backup/bashrc-${backupfile}                       # bashrc file backup
+  cp /etc/security/pwquality.conf /opt/config_files_backup/pwquality.conf-${backupfile}  # pwquality.conf file backup
+  cp /etc/profile /opt/config_files_backup/profile-${backupfile}                     # profile file backup
+  cp /etc/selinux/config /opt/config_files_backup/selinux-config-${backupfile}       # selinux-config file backup
+  cp /etc/pam.d/system-auth /opt/config_files_backup/system-auth-${backupfile}       # system-auth file backup
+  cp /etc/pam.d/su /opt/config_files_backup/pam.d-su-${backupfile}                   # pam.d-su file backup
+  cp /etc/profile.d/cis.sh /opt/config_files_backup/profile-cis-${backupfile}        # profile-cis file backup
 
  # Set Password Creation Requirement Parameters Using pam_pwquality
   echo

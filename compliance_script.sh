@@ -3,8 +3,9 @@
 echo " *************** START NTP *************** "
 
     mkdir -p /opt/config_files_backup
-    cp /etc/ntp.conf /opt/config_files_backup/ntp.conf-backup             # ntp.conf file backup
-    cp /etc/sysconfig/ntpd /opt/config_files_backup/ntpd-backup           # ntpd file backup
+    backupfile=$(date +'%Y_%d_%m_%H:%M')
+    cp /etc/ntp.conf /opt/config_files_backup/ntp.conf-${backupfile}             # ntp.conf file backup
+    cp /etc/sysconfig/ntpd /opt/config_files_backup/ntpd-${backupfile}           # ntpd file backup
 
     # Configure Network Time Protocol (NTP)
     a=$(cat /etc/ntp.conf | grep 'restrict default kod nomodify notrap nopeer noquery')
@@ -45,8 +46,9 @@ echo " *************** END NTP *************** "
 echo " *************** START CHRONY *************** "
 
     mkdir -p /opt/config_files_backup
-    cp /etc/chrony.conf /opt/config_files_backup/chrony.conf-backup         # chrony.conf file backup
-    cp /etc/sysconfig/chronyd //opt/config_files_backup/chronyd-backup      # chronyd file backup
+    backupfile=$(date +'%Y_%d_%m_%H:%M')
+    cp /etc/chrony.conf /opt/config_files_backup/chrony.conf-${backupfile}         # chrony.conf file backup
+    cp /etc/sysconfig/chronyd //opt/config_files_backup/chronyd-${backupfile}      # chronyd file backup
 
     a=$(cat /etc/chrony.conf | grep 'server 0.rhel.pool.ntp.org iburst')
     b=$a
@@ -120,8 +122,9 @@ echo " *************** END CHRONY *************** "
 echo " *************** START AUDITCTL *************** "
 
     mkdir -p /opt/config_files_backup
-    cp etc/audit/auditd.conf /opt/config_files_backup/auditd.conf-backup                  # auditd.conf backup
-    cp /etc/audit/rules.d/audit.rules /opt/config_files_backup/audit.rules-backup         # audit.rules backup
+    backupfile=$(date +'%Y_%d_%m_%H:%M')
+    cp etc/audit/auditd.conf /opt/config_files_backup/auditd.conf-${backupfile}                  # auditd.conf backup
+    cp /etc/audit/rules.d/audit.rules /opt/config_files_backup/audit.rules-${backupfile}         # audit.rules backup
 
     # Keep All Auditing Information
     echo
@@ -517,7 +520,8 @@ echo " *************** END Installing AUID and Removing setroubleshoot, mcstrans
 echo " *************** START BLACK LIST *************** "
 
     mkdir -p /opt/config_files_backup
-    cp /etc/modprobe.d/blacklist.conf /opt/config_files_backup/blacklist.conf-backup           # blacklist.conf file backup
+    backupfile=$(date +'%Y_%d_%m_%H:%M')
+    cp /etc/modprobe.d/blacklist.conf /opt/config_files_backup/blacklist.conf-${backupfile}           # blacklist.conf file backup
 
     if [ ! -e /etc/modprobe.d/blacklist.conf ]; then
         mkdir -p /etc/modprobe.d
@@ -637,7 +641,8 @@ echo " *************** END BLACK LIST *************** "
 echo " *************** START COREDUMP *************** "
 
     mkdir -p /opt/config_files_backup
-    cp /etc/systemd/coredump.conf opt/config_files_backup/coredump.conf-backup      # coredump.conf file backup
+    backupfile=$(date +'%Y_%d_%m_%H:%M')
+    cp /etc/systemd/coredump.conf opt/config_files_backup/coredump.conf-${backupfile}      # coredump.conf file backup
 
     egrep -q "^(\s*)Storage\s*=\s*\S+(\s*#.*)?\s*$" /etc/systemd/coredump.conf && sed -ri "s/^(\s*)Storage\s*=\s*\S+(\s*#.*)?\s*$/\Storage=none\2/" /etc/systemd/coredump.conf || echo "Storage=none" >> /etc/systemd/coredump.conf
     egrep -q "^(\s*)ProcessSizeMax\s*=\s*\S+(\s*#.*)?\s*$" /etc/systemd/coredump.conf && sed -ri "s/^(\s*)ProcessSizeMax\s*=\s*\S+(\s*#.*)?\s*$/\ProcessSizeMax=0\2/" /etc/systemd/coredump.conf || echo "ProcessSizeMax=0" >> /etc/systemd/coredump.conf
@@ -728,7 +733,8 @@ echo " *************** END FIREWALLD *************** "
 echo " *************** START grub *************** "
 
     mkdir -p /opt/config_files_backup
-    cp /boot/grub2/grub.cfg /opt/config_files_backup/grub.cfg-backup      # grub.cfg file backup
+    backupfile=$(date +'%Y_%d_%m_%H:%M')
+    cp /boot/grub2/grub.cfg /opt/config_files_backup/grub.cfg-${backupfile}      # grub.cfg file backup
 
     # Set User/Group Owner on /boot/grub2/grub.cfg
     echo
@@ -753,7 +759,8 @@ echo " *************** END grub *************** "
 echo " *************** START JOURNALD *************** "
 
     mkdir -p /opt/config_files_backup
-    cp /etc/systemd/journald.conf /opt/config_files_backup/journald.conf-backup         # journald.conf file backup
+    backupfile=$(date +'%Y_%d_%m_%H:%M')
+    cp /etc/systemd/journald.conf /opt/config_files_backup/journald.conf-${backupfile}         # journald.conf file backup
 
     egrep -q "^(\s*)ForwardToSyslog\s*=\s*\S+(\s*#.*)?\s*$" /etc/systemd/journald.conf && sed -ri "s/^(\s*)ForwardToSyslog\s*=\s*\S+(\s*#.*)?\s*$/\1ForwardToSyslog=yes\2/" /etc/systemd/journald.conf || echo "ForwardToSyslog=yes" >> /etc/systemd/journald.conf
     egrep -q "^(\s*)Compress\s*=\s*\S+(\s*#.*)?\s*$" /etc/systemd/journald.conf && sed -ri "s/^(\s*)Compress\s*=\s*\S+(\s*#.*)?\s*$/\1Compress=yes\2/" /etc/systemd/journald.conf || echo "Compress=yes" >> /etc/systemd/journald.conf
@@ -764,7 +771,8 @@ echo " *************** END JOURNALD *************** "
 echo " *************** START LOGIN *************** "
 
     mkdir -p /opt/config_files_backup
-    cp /etc/login.defs /opt/config_files_backup/login.defs-backup       # login.defsfile backup
+    backupfile=$(date +'%Y_%d_%m_%H:%M')
+    cp /etc/login.defs /opt/config_files_backup/login.defs-${backupfile}       # login.defsfile backup
 
     # Set  Expiration Days
     echo
@@ -789,10 +797,11 @@ echo " *************** START LOGIN *************** "
 echo " *************** START PWQUALITY *************** "
 
     mkdir -p /opt/config_files_backup
-    cp /etc/bashrc /opt/config_files_backup/bashrc-backup                       # bashrc file backup
-    cp /etc/security/pwquality.conf /opt/config_files_backup/pwquality.conf-backup  # pwquality.conf file backup
-    cp /etc/profile /opt/config_files_backup/profile-backup                     # profile file backup
-    cp /etc/selinux/config /opt/config_files_backup/selinux-config-backup       # selinux-config file backup
+    backupfile=$(date +'%Y_%d_%m_%H:%M')
+    cp /etc/bashrc /opt/config_files_backup/bashrc-${backupfile}                       # bashrc file backup
+    cp /etc/security/pwquality.conf /opt/config_files_backup/pwquality.conf-${backupfile}  # pwquality.conf file backup
+    cp /etc/profile /opt/config_files_backup/profile-${backupfile}                     # profile file backup
+    cp /etc/selinux/config /opt/config_files_backup/selinux-config-${backupfile}       # selinux-config file backup
 
     # Set Password Creation Requirement Parameters Using pam_pwquality
     echo
@@ -946,7 +955,8 @@ echo " *************** END PWQUALITY *************** "
 echo " *************** START RSYSLOG *************** "
 
     mkdir -p /opt/config_files_backup
-    cp /etc/rsyslog.conf /opt/config_files_backup/rsyslog.conf-backup     # rsyslog.conf file backup
+    backupfile=$(date +'%Y_%d_%m_%H:%M')
+    cp /etc/rsyslog.conf /opt/config_files_backup/rsyslog.conf-${backupfile}     # rsyslog.conf file backup
 
     # Install the rsyslog package
     echo
@@ -975,7 +985,8 @@ echo " *************** END RSYSLOG *************** "
 echo " *************** START SSHD *************** "
  
     mkdir -p /opt/config_files_backup
-    cp  /etc/ssh/sshd_config /opt/config_files_backup/sshd_config-backup        # sshd_config file backup
+    backupfile=$(date +'%Y_%d_%m_%H:%M')
+    cp  /etc/ssh/sshd_config /opt/config_files_backup/sshd_config-${backupfile}        # sshd_config file backup
 
     # Set Permissions on /etc/ssh/sshd_config
     echo
@@ -1095,8 +1106,9 @@ echo " *************** END SSHD *************** "
 echo " *************** START SUDOERS *************** "
 
     mkdir -p /opt/config_files_backup
-    cp /etc/sudoers /opt/config_files_backup/sudoers-backup       # sudoers file backup
-    cp /etc/yum.conf /opt/config_files_backup/yum.conf-backup       # yum.conf file backup
+    backupfile=$(date +'%Y_%d_%m_%H:%M')
+    cp /etc/sudoers /opt/config_files_backup/sudoers-${backupfile}       # sudoers file backup
+    cp /etc/yum.conf /opt/config_files_backup/yum.conf-${backupfile}       # yum.conf file backup
 
     # Installing sudo
     yum install sudo
@@ -1129,7 +1141,8 @@ echo " *************** END SUDOERS *************** "
 echo " *************** START SYSCTL *************** "
 
     mkdir -p /opt/config_files_backup
-    cp /etc/sysctl.conf /opt/config_files_backup/sysctl.conf-backup     # sysctl.conf file backup
+    backupfile=$(date +'%Y_%d_%m_%H:%M')
+    cp /etc/sysctl.conf /opt/config_files_backup/sysctl.conf-${backupfile}     # sysctl.conf file backup
 
     # Restrict Core Dumps
     echo

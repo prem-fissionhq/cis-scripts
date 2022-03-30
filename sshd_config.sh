@@ -3,7 +3,8 @@
 echo " *************** START SSHD *************** "
  
   mkdir -p /opt/config_files_backup
-  cp  /etc/ssh/sshd_config /opt/config_files_backup/sshd_config-backup        # sshd_config file backup
+  backupfile=$(date +'%Y_%d_%m_%H:%M')
+  cp  /etc/ssh/sshd_config /opt/config_files_backup/sshd_config-${backupfile}        # sshd_config file backup
 
  # Set Permissions on /etc/ssh/sshd_config
   echo

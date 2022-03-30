@@ -3,8 +3,9 @@
 echo " *************** START NTP *************** "
 
   mkdir -p /opt/config_files_backup
-  cp /etc/ntp.conf /opt/config_files_backup/ntp.conf-backup             # ntp.conf file backup
-  cp /etc/sysconfig/ntpd /opt/config_files_backup/ntpd-backup           # ntpd file backup
+  backupfile=$(date +'%Y_%d_%m_%H:%M')
+  cp /etc/ntp.conf /opt/config_files_backup/ntp.conf-${backupfile}              # ntp.conf file backup
+  cp /etc/sysconfig/ntpd /opt/config_files_backup/ntpd-${backupfile}            # ntpd file backup
 
   # Configure Network Time Protocol (NTP)
   a=$(cat /etc/ntp.conf | grep 'restrict default kod nomodify notrap nopeer noquery')

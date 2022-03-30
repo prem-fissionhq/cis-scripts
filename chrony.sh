@@ -3,8 +3,9 @@
 echo " *************** START CHRONY *************** "
 
 mkdir -p /opt/config_files_backup
-cp /etc/chrony.conf /opt/config_files_backup/chrony.conf-backup         # chrony.conf file backup
-cp /etc/sysconfig/chronyd //opt/config_files_backup/chronyd-backup      # chronyd file backup
+backupfile=$(date +'%Y_%d_%m_%H:%M')
+cp /etc/chrony.conf /opt/config_files_backup/chrony.conf-${backupfile}          # chrony.conf file backup
+cp /etc/sysconfig/chronyd //opt/config_files_backup/chronyd-${backupfile}       # chronyd file backup
 
 a=$(cat /etc/chrony.conf | grep 'server 0.rhel.pool.ntp.org iburst')
 b=$a
