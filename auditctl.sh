@@ -3,8 +3,9 @@
 echo " *************** START AUDITCTL *************** "
 
   mkdir -p /opt/config_files_backup
-  cp etc/audit/auditd.conf /opt/config_files_backup/auditd.conf-backup                  # auditd.conf backup
-  cp /etc/audit/rules.d/audit.rules /opt/config_files_backup/audit.rules-backup         # audit.rules backup
+  backupfile=$(date +'%Y_%d_%m_%H:%M')
+  cp etc/audit/auditd.conf /opt/config_files_backup/auditd.conf-${backupfile}                   # auditd.conf backup
+  cp /etc/audit/rules.d/audit.rules /opt/config_files_backup/audit.rules-${backupfile}          # audit.rules backup
 
  # Keep All Auditing Information
   echo
@@ -90,7 +91,7 @@ echo " *************** START AUDITCTL *************** "
   echo
   echo \*\*\*\* Collect\ Unsuccessful\ Unauthorized\ Access\ Attempts\ to\ Files
   egrep -q "^\s*-a\s+always,exit\s+-F\s+arch=$bit\s+-S\s+creat\s+-S\s+open\s+-S\s+openat\s+-S\s+truncate\s+-S\s+ftruncate\s+-F\s+exit=-EACCES\s+-F\s+auid>=1000\s+-F\s+auid!=4294967295\s+-k\s+access\s*(#.*)?$" /etc/audit/rules.d/audit.rules || echo "-a always,exit -F arch=$bit -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=1000 -F auid!=4294967295 -k access" >> /etc/audit/rules.d/audit.rules
-  egrep -q "^\s*-a\s+always,exit\s+-F\s+arch=b32\s+-S\s+creat\s+-S\s+open\s+-S\s+openat\s+-S\s+truncate\s+-S\s+ftruncate\s+-F\s+exit=-EPERM\s+-F\s+auid>=1000\s+-F\s+auid!=4294967295\s+-k\s+access\s*(#.*)?$" /etc/audit/rules.d/audit.rules || echo "-a always,exit -F arch=$bit -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access" >> /etc/audit/rules.d/audit.rules
+  egrep -q "^\s*-a\s+always,exit\s+-F\s+arch=$bit\s+-S\s+creat\s+-S\s+open\s+-S\s+openat\s+-S\s+truncate\s+-S\s+ftruncate\s+-F\s+exit=-EPERM\s+-F\s+auid>=1000\s+-F\s+auid!=4294967295\s+-k\s+access\s*(#.*)?$" /etc/audit/rules.d/audit.rules || echo "-a always,exit -F arch=$bit -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=1000 -F auid!=4294967295 -k access" >> /etc/audit/rules.d/audit.rules
 
   # Collect Use of Privileged Commands
   echo
