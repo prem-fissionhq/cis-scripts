@@ -42,7 +42,7 @@ echo " *************** START NTP *************** "
             echo "Change already present 3"
     fi
 echo " *************** END NTP *************** "
-
+echo
 echo " *************** START CHRONY *************** "
 
     mkdir -p /opt/config_files_backup
@@ -118,7 +118,7 @@ echo " *************** START CHRONY *************** "
     fi
 
 echo " *************** END CHRONY *************** "
-
+echo
 echo " *************** START AUDITCTL *************** "
 
     mkdir -p /opt/config_files_backup
@@ -268,7 +268,7 @@ echo " *************** START AUDITCTL *************** "
     systemctl restart auditd.service
 
 echo " *************** END AUDITCTL *************** "
-
+echo
 echo " *************** START AUDITCTL LIST *************** "
     auditctl -b 8192
     auditctl -f 1
@@ -325,7 +325,7 @@ echo " *************** START AUDITCTL LIST *************** "
     auditctl -e 2
 
 echo " *************** END AUDITCTL LIST *************** "
-
+echo
 echo " *************** START Installing AUID and Removing setroubleshoot, mcstrans, xinetd *************** "
 
     # Install AIDE
@@ -516,7 +516,7 @@ echo " *************** START Installing AUID and Removing setroubleshoot, mcstra
     rpm -q net-snmp && yum -y remove net-snmp
 
 echo " *************** END Installing AUID and Removing setroubleshoot, mcstrans, xinetd *************** "
-
+echo
 echo " *************** START BLACK LIST *************** "
 
     mkdir -p /opt/config_files_backup
@@ -637,7 +637,7 @@ echo " *************** START BLACK LIST *************** "
     #echo -e "install cramfs /bin/true\ninstall freevxfs /bin/true\ninstall jffs2 /bin/true\ninstall hfs /bin/true\ninstall hfsplus /bin/true\ninstall squashfs /bin/true\ninstall udf /bin/true\ninstall usb-storage /bin/true" >> /etc/modprobe.d/blacklist.conf
 
 echo " *************** END BLACK LIST *************** "
-
+echo
 echo " *************** START COREDUMP *************** "
 
     mkdir -p /opt/config_files_backup
@@ -720,7 +720,7 @@ echo " *************** START CROND *************** "
     chown 0:0 /etc/cron.allow
 
 echo " *************** END CROND *************** "
-
+echo
 echo " *************** START FIREWALLD *************** "
 
     yum install firewalld -y
@@ -729,7 +729,7 @@ echo " *************** START FIREWALLD *************** "
     systemctl status firewalld
 
 echo " *************** END FIREWALLD *************** "
-
+echo
 echo " *************** START grub *************** "
 
     mkdir -p /opt/config_files_backup
@@ -755,7 +755,7 @@ echo " *************** START grub *************** "
     #egrep -q "^(\s*)selinux\s*=\s*\S+(\s*#.*)?\s*$" /boot/grub2/grub.cfg && sed -ri "s/^(\s*)selinux\s*=\s*\S+(\s*#.*)?\s*$/\selinux=0\2/" /boot/grub2/grub.cfg || echo "selinux=0" >> /boot/grub2/grub.cfg
 
 echo " *************** END grub *************** "
-
+echo
 echo " *************** START JOURNALD *************** "
 
     mkdir -p /opt/config_files_backup
@@ -767,7 +767,7 @@ echo " *************** START JOURNALD *************** "
     egrep -q "^(\s*)Storage\s*=\s*\S+(\s*#.*)?\s*$" /etc/systemd/journald.conf && sed -ri "s/^(\s*)Storage\s*=\s*\S+(\s*#.*)?\s*$/\1Storage=persistent\2/" /etc/systemd/journald.conf || echo "Storage=persistent" >> /etc/systemd/journald.conf
 
 echo " *************** END JOURNALD *************** "
-
+echo
 echo " *************** START LOGIN *************** "
 
     mkdir -p /opt/config_files_backup
@@ -792,8 +792,8 @@ echo " *************** START LOGIN *************** "
     egrep -q "^(\s*)PASS_WARN_AGE\s+\S+(\s*#.*)?\s*$" /etc/login.defs && sed -ri "s/^(\s*)PASS_WARN_AGE\s+\S+(\s*#.*)?\s*$/\PASS_WARN_AGE 7\2/" /etc/login.defs || echo "PASS_WARN_AGE 7" >> /etc/login.defs
     #getent passwd | cut -d ':' -f 1 | xargs -n1 chage --warndays 7
 
- echo " *************** END LOGIN *************** "
-
+echo " *************** END LOGIN *************** "
+echo
 echo " *************** START PWQUALITY *************** "
 
     mkdir -p /opt/config_files_backup
@@ -951,7 +951,7 @@ echo " *************** START PWQUALITY *************** "
     #   sed -ri '/^\+:.*$/ d' /etc/group
 
 echo " *************** END PWQUALITY *************** "
-
+echo
 echo " *************** START RSYSLOG *************** "
 
     mkdir -p /opt/config_files_backup
@@ -981,7 +981,7 @@ echo " *************** START RSYSLOG *************** "
     fi
 
 echo " *************** END RSYSLOG *************** "
-
+echo
 echo " *************** START SSHD *************** "
  
     mkdir -p /opt/config_files_backup
@@ -1102,7 +1102,7 @@ echo " *************** START SSHD *************** "
     egrep -q "^(\s*)MaxStartups\s+\S+(\s*#.*)?\s*$" /etc/ssh/sshd_config && sed -ri "s/^(\s*)MaxStartups\s+\S+(\s*#.*)?\s*$/\1MaxStartups 10:30:60\2/" /etc/ssh/sshd_config || echo "MaxStartups 10:30:60" >> /etc/ssh/sshd_config 
 
 echo " *************** END SSHD *************** "
-
+echo
 echo " *************** START SUDOERS *************** "
 
     mkdir -p /opt/config_files_backup
@@ -1111,7 +1111,7 @@ echo " *************** START SUDOERS *************** "
     cp /etc/yum.conf /opt/config_files_backup/yum.conf-${backupfile}       # yum.conf file backup
 
     # Installing sudo
-    yum install sudo
+    yum -y install sudo
 
     a=$(cat /etc/sudoers | grep 'Defaults    use_pty')
     c="Defaults    use_pty"
@@ -1137,7 +1137,7 @@ echo " *************** START SUDOERS *************** "
     egrep -q "^(\s*)gpgcheck\s*=\s*\S+(\s*#.*)?\s*$" /etc/yum.conf && sed -ri "s/^(\s*)gpgcheck\s*=\s*\S+(\s*#.*)?\s*$/\gpgcheck=1\2/" /etc/yum.conf || echo "gpgcheck=1" >> /etc/yum.conf
 
 echo " *************** END SUDOERS *************** "
-
+echo
 echo " *************** START SYSCTL *************** "
 
     mkdir -p /opt/config_files_backup

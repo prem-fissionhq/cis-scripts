@@ -8,7 +8,7 @@ echo " *************** START SUDOERS *************** "
         cp /etc/yum.conf /opt/config_files_backup/yum.conf-${backupfile}              # yum.conf file backup
 
         # Installing sudo
-        yum install sudo
+        yum install sudo -y
 
         a=$(cat /etc/sudoers | grep 'Defaults    use_pty')
         c="Defaults    use_pty"
