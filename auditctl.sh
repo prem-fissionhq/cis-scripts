@@ -147,5 +147,6 @@ echo " *************** START AUDITCTL *************** "
   echo
   echo \*\*\*\* Enable\ auditd\ Service
   systemctl restart auditd.service
+  #service auditd restart
 
   echo " *************** END AUDITCTL LIST *************** "

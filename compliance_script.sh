@@ -265,7 +265,8 @@ echo " *************** START AUDITCTL *************** "
     # Restart auditd Service
     echo
     echo \*\*\*\* Enable\ auditd\ Service
-    systemctl restart auditd.service
+    #systemctl restart auditd.service
+    service auditd restart
 
 echo " *************** END AUDITCTL *************** "
 echo
@@ -642,7 +643,7 @@ echo " *************** START COREDUMP *************** "
 
     mkdir -p /opt/config_files_backup
     backupfile=$(date +'%Y_%d_%m_%H:%M')
-    cp /etc/systemd/coredump.conf opt/config_files_backup/coredump.conf-${backupfile}      # coredump.conf file backup
+    cp /etc/systemd/coredump.conf /opt/config_files_backup/coredump.conf-${backupfile}      # coredump.conf file backup
 
     egrep -q "^(\s*)Storage\s*=\s*\S+(\s*#.*)?\s*$" /etc/systemd/coredump.conf && sed -ri "s/^(\s*)Storage\s*=\s*\S+(\s*#.*)?\s*$/\Storage=none\2/" /etc/systemd/coredump.conf || echo "Storage=none" >> /etc/systemd/coredump.conf
     egrep -q "^(\s*)ProcessSizeMax\s*=\s*\S+(\s*#.*)?\s*$" /etc/systemd/coredump.conf && sed -ri "s/^(\s*)ProcessSizeMax\s*=\s*\S+(\s*#.*)?\s*$/\ProcessSizeMax=0\2/" /etc/systemd/coredump.conf || echo "ProcessSizeMax=0" >> /etc/systemd/coredump.conf
@@ -824,7 +825,6 @@ echo " *************** START PWQUALITY *************** "
     egrep -q "^(\s*)SELINUX\s*=\s*\S+(\s*#.*)?\s*$" /etc/selinux/config && sed -ri "s/^(\s*)SELINUX\s*=\s*\S+(\s*#.*)?\s*$/\SELINUX=enforcing\2/" /etc/selinux/config || echo "SELINUX=enforcing" >> /etc/selinux/config
 
     # Restrict Access to the su Command
-    cp /etc/pam.d/su /tmp/cis_config_files/su-original
     echo
     echo \*\*\*\* Restrict\ Access\ to\ the\ su\ Command
     egrep -q "^\s*auth\s+required\s+pam_wheel.so(\s+.*)?$" /etc/pam.d/su && sed -ri '/^\s*auth\s+required\s+pam_wheel.so(\s+.*)?$/ { /^\s*auth\s+required\s+pam_wheel.so(\s+\S+)*(\s+use_uid)(\s+.*)?$/! s/^(\s*auth\s+required\s+pam_wheel.so)(\s+.*)?$/\1 use_uid\2/ }' /etc/pam.d/su || echo "auth required pam_wheel.so use_uid" >> /etc/pam.d/su
