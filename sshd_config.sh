@@ -119,4 +119,9 @@ echo " *************** START SSHD *************** "
  # MaxStartups
   egrep -q "^(\s*)MaxStartups\s+\S+(\s*#.*)?\s*$" /etc/ssh/sshd_config && sed -ri "s/^(\s*)MaxStartups\s+\S+(\s*#.*)?\s*$/\1MaxStartups 10:30:60\2/" /etc/ssh/sshd_config || echo "MaxStartups 10:30:60" >> /etc/ssh/sshd_config 
 
+ echo
+ echo \*\*\*\* Restarting\ sshd\ service
+ systemctl restart sshd.service
+
+ 
 echo " *************** END SSHD *************** "
